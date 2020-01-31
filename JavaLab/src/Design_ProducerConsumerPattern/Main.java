@@ -1,4 +1,4 @@
-package Design_Producer_Consumer_Pattern;
+package Design_ProducerConsumerPattern;
 
 public class Main {
 
