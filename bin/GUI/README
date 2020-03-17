@@ -1,0 +1,217 @@
+**java GUI 
+1.awt
+->운영체제의 자원을 이용해서 GUI 프로그래밍
+->운영체제 별로 다르게 출력될 수 있습니다. 
+->운영체제에 종속적이라서 느리고 무겁습니다. 
+
+2.swing
+->jvm 자원을 이용해서 GUI 프로그래밍 
+->운영체제에 독립적이고 속도가 awt 보다는 빠르다. 
+->swing의 대부분의 클래스는 awt로부터 상속받았습니다. 
+
+3.javaFX 
+->가볍고 풍부한 UI 제공 
+->기본적으로 레이아웃, 스타일, 애플리케이션 로직의 분리 : MVC 구현 
+->html이나 css도 사용이 가능 
+->swing으로 만들어져 있는 많은 애플리케이션들이 javaFX로 변환되고 있는 중 
+
+4.awt와 swing의 이벤트 처리 방식이 안드로이드 이벤트 처리 방식 
+awt와 swing은 이벤트 처리 클래스가 별도의 클래스로 존재하는데 안드로이드에서는 뷰의 내부 클래스로 존재 
+
+**AWT
+->운영체제에 종속적인 GUI 프로그래밍
+->최근에는 거의 사용 안함.
+
+1.GUI 화면 구성 요소
+1) Component (View)
+->화면에 보여지는 개체들의 최상위 클래스 
+
+2) Container
+->Component로 부터 상속을 받아서 다른 컴포넌트들을 묶어서 출력하기 위한 컴포넌트 (레이아웃)
+->단독으로 출력가능한 객체  : Frame, Dialog 
+->단독으로 출력이 안되는 객체 : Panel, Window
+->브라우저를 이용해서 출력하는 객체 : Applet - 사용을 금기시 함
+HTML5에서는 별도의 플러그 인 없이 웹 애플리케이션을 구현하자는 주의여서 Active-X, applet, flash 등의 사용을 배제 
+
+2. Componenet 의 주요 메소드
+Color getBackground(), void setBackground(Color color) -> 배경색 관련 메소드 
+Cursor getCutsor(), void setCursor(Cursor, cyrsor) -> 마우스 커서 관련 메소드 
+Font getFont(), void setFont(Font font) -> 폰트
+Color getForground(), void setForeground(Color color) -> 글자색 
+Point getLocation(), void setLocation(Point) -> 좌표 
+Dimension getSize(), void setSize(Dimension dimension) -> 크기 
+-> 크기와 좌표는 분할해서 2개로 설정해도 됨. x, y . 가로세로
+Rectangle getBounds(), void setBounds(Rectanlgle rectangle) - > 좌표와 크기
+-> 숫자 4개로 설정이 가능 
+위치의 기본값은 0,0 크기의 기본값도 0,0 (만들고 난후에 크기를 안주면 화면에 출력이안됨. 크기는 필수요소)   
+
+void setEnabled(boolean isEnabled) : 활성화 여부 설정
+void setVisible(boolean isVisible) : 화면 출력 여부  (맨처음 전체 윈도우에 불러와야 출력됨)
+
+3.Frame
+->애플리케이션의 가장 기본이 되는 윈도우 
+->기본적으로 화면에 출력되지 않도록 설정되어 있기 때문에 setVisible을 호출해서 화면에 보여지도록 설정해야 한다. 
+->setTitle을 이용하면 제목을 설정 할 수 있습니다. 
+->종료버튼이 제공이 되지만 기능은 없습니다. 
+나중에 이벤트 처리를 해야만 창을 종료할 수 있습니다.
+
+4.Component 를 다른 Component에 추가할때는 add(Component component)를 호출하면 추가됨.
+
+5.윈도우 생성
+->제공되는 클래스를 사용할 때 제공되는 클래스의 인스턴스를 바로 만들어서 사용하는 경우인데 기능이 충분해서 인스턴스 생성만으로 옵션들을 설정해서 사용합니다. 
+->상속받아서 사용하는 경우는 기능이 부족해서 기능을 추가해서(Overriding) 사용하기 위해서 입니다. 
+초기화 작업을 추가하거나 메소드 오버라이딩을 해서 사용 (그냥 메소드를 추가하는경우는 없다.)
+
+1)Frame 인스턴스를 만들어서 출력
+
+2)Frame으로부터 상속받는 클래스를 만들고 클래스의 인스턴스를 만들어서 출력 
+->이방법이 권장
+->생성자를 만들어서 필요한 옵션을 설정
+
+6.Panel
+->단독으로는 출력될수 없는 컨테이너로 여러 컴포넌트들을 묶어서 출력하기 위한 객체
+1) 생성자
+Panel() : 기본 배치 방법으로 생성 
+Panel(LayoutManager layoutManager) : 배치 방법을 설정해서 생성
+
+2)주요 메소드
+add(Component componnet ) : 패얼위에 컴포넌트 추가
+
+7.Diaplog (대화상자)
+1) Modal과 Modells
+Modal : 화면에 출력되어 있으면 다른 곳에서 제어권을 뺏기지 ㅇ낳는 대화상자, 열기와 저장 대화상자
+
+Modeless : 화면에 출력된 상태에서 다른으로 제어권을 옮길 수 있는 대화상자, 찾기와 바꾸기
+옵션을 대화상자에서 변경하고 바로 적용하고자 할 때 사용
+modeless는 지역변수로 만들면 나중에 대화상자를 닫지 못하는 경우가 발생할수있습니다.
+
+2)생성자
+Dialog(Frame 이나 Dialog owner) : 대화상자가 닫히고 난 후 포커스를 받을 윈도우를 설정해서 생성
+Dialog(Frame 이나 Dialog owner, String title) 
+Dialog(Frame 이나 Dialog owner, boolean modal)
+Dialog(Frame 이나 Dialog owner, String title, boolean modal) 
+
+8.Button
+1) 생성
+Button()
+Button(String, title)
+
+2)메소드
+String getLabel()
+void setLabel( String label)
+
+9.CheckBox
+1)생성자
+CheckBox()
+CheckBox(String title)
+CheckBox(String title, boolean state)
+CheckBox(String title, CheckboxGroup, boolean state)
+->CheckBoxGroup 인스턴스를 생성해서 대입하면 라이도 버튼
+
+10.Choice
+->여러개의 항목을 출력하고 그 중에 하나를 선택할 수 잇도록 해주는 컴포넌트
+1)생성자
+Choice()
+
+2)메소드
+void add(String item)
+String getItem(int index)
+int getItemCount()
+int getSelectedIndex() : 선택된 인덱스를 리턴 
+String getSelectedItem() : 선택된 문자열을 리턴
+void remove(int index 또는 String item)
+
+11.Label 
+->텍스트 출력 컴포넌트 
+1)생성자
+Label()
+Label(String text) 
+Label(String text, int alignment) : 맞춤을 지정해서 출력
+alignment는 정수지만 옵션이기 때문에 직접 숫자를 설정하지 않고 클래스의 상수 이용 
+
+2) 메소드
+String getText()
+void setText(String text) 
+void setAlignment(int Alignment) 
+
+12.List
+->여러 개의 항목을 출력하고 선택할 수 있도록 해주는 컴포넌트 
+->Multiple Mode 설정을 이용해서 여러개 선택이 가능 
+1)생성자
+List() 
+List(int rows) : 보여줄 행의 개수 
+List(int rows, boolean multipleMode) :행의 개수를 설정하고 다중 선택 모드를 설정 
+
+2)Choice 의 메소드 추가 
+int [] getSelectedIndexes() : 여러개 선택한 경우 선택된 인덱스를 배열로 리턴
+String [] getSeletedItems() 
+
+13.TextField
+-> 한줄의 문자열을 입력받는 컴포넌트 
+1)생성자 
+TextField()
+TextField(int columns) : 크기(글자 개수) 설정
+TextField(String text) : 초기 문자열
+TextField(String text, int columns) : 초기 문자열
+
+2) 메소드 
+void setEchoChar(char ch) : 화면에 보여질 문자 
+
+14.TextArea
+->여러 줄 입력받는 컴포넌트 
+->TextArea(String text, int rows, int colummns, int scrollbars)
+
+15.Scrollpane
+->GUI 프로그래밍에서는 자신의 부모보다 더 큰 콘텐츠는 화면에 출력할 수 없습니다. 
+부모보다 큰 경우에는 Scroll이 가능한 컴포넌트에 배치를 해서 스크롤 바를 이용해서 보여주도록 해야 합니다.
+->생성자
+ScrollPane(int 스크롤바정책) : 항상 보여줄 것인지 아니면 필요할때만 보여줄 것인지 등
+
+16.메뉴
+->MenuBar, Menu, MenuItem(CheckboxMenuItem)
+->MenuBar 인스턴스를 만들고 Frame에 add
+->Menu를 만들고 Menu는 MenuBar에 add, Menu를 만들 때는 문자열과 함께 생성
+->MenuItem 이나 Menu를 만들어서 Menu에 부착 
+
+17.Common Dialog
+->자주 사용하는 기능의 대화상자를 미리 만들어서 제공
+->awt에서는 FileDialog 를 제공 
+1)FileDialog의 생성자
+FileDialog(Frame owner, String title, int mode) : mode는 열기 대화상자인지 저장 대화상자로 만들것인지 결정 - FileDialog.LOAD(열기대화상자), FileDialog.SAVE(저장대화상자)
+
+2)FileDialog의 메소드 
+String getFile() : 선택한 파일명 리턴 
+String getDirectory() : 선택한 디렉토리명 리턴
+
+void setFile(String file) : 파일을 선택 
+void setDirectory(String directory) : 디렉토리를 선택  
+18.Layout
+->컨테이너에 컴포넌트를 배치하는 방법
+->Panel은 생성할 때 설정이 가능하고 Frame과 Panel 모두 setLayout 메소드를 이요해서 변경도 가능
+1) FlowLayout 
+->Panel의 기본 배치 방법으로 가로 방향으로 컴포넌트를 배치하고 더 이상 공간이 없으면 아래쪽으로 배치 
+->ner FlowLayout() 으로 생성
+
+2)BorderLayout
+->Frame의 기본 배치 방법으로 동서남북 그리고 중앙에 하나의 컴포넌트만 배치하는 방법 
+add를 다른 옵션없이 사용하면 중앙에 1개만 배치됩니다. 
+->각 방향에 배치를 할 때는 add(String 방향, Component component)로 배치
+->방향은 대소문자 구분을 함. (Ease, West, North, South, Center) 
+->동서남북에 배치가 안되면 그 영역은 전부 Center의 영역 
+->하나의 영역에 하나의 컴포넌트만 배치가 가능한데 컴포넌트를 Panel로 만들어서 배치하면 여러 개도 가능하다. 
+
+3)GridLayout
+->격자(표) 모양의 레이아웃
+->하나의 셀에 하나의 컴포넌트를 배치 
+->add를 호출하면 순서대로 배치 
+->셀이 부족하면 자동으로 늘어남 
+->new GridLayout(int 행의 수 , int 열의 수)로 만들어서 setLayout  메소드에 대입
+
+4)CardLayout
+->화면에 하나씩 겹쳐서 배치
+
+5)null 
+->지금까지의 레이아웃은 크기 조절이나 위치조정을 못합니다. 
+->레이아웃에 null을 설정하면 컴포넌트들의 위치나 크기를 조절할 수 있습니다. 
+->위치나 크기를 조절할 때 해상도나 전체 화면 크기를 고려해서 절대값보다는 상대적인 값으로 설정하는것을 권장함. 
+->화면에 배치되는 모든 컴포넌트들의 좌표와 크기를 설정해야 합니다.
