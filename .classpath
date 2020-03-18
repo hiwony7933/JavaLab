@@ -2,5 +2,10 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/Users/jw/java/Servers/mariadb-java-client-2.5.4.jar"/>
+	<classpathentry kind="lib" path="/Users/jw/java/Servers/jsoup-1.11.3.jar"/>
+	<classpathentry kind="lib" path="/Users/jw/java/Servers/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="/Users/jw/java/Servers/jbcrypt-0.4.jar"/>
+	<classpathentry kind="lib" path="/Users/jw/java/Servers/selenium-server-standalone-3.141.59.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

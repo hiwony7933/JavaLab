@@ -10,7 +10,7 @@ public class DaumLogin {
 
 	public static void main(String[] args) {
 		// 크롬 드라이버의 위치를 프로퍼티에 추가 // 강제 실행이 되었으면 주석처리하고 해도됨.
-		// System.setProperty("webdriver.chrome.driver", "./chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "../java/Servers/chromedriver.exe");
 		// 크롬 실행
 		WebDriver driver = new ChromeDriver();
 		// 크롬에서 다음 로그인 사이트 접속
